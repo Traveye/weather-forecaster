@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>Weather Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="/assets/style.css">
   </head>
@@ -20,8 +20,9 @@
     <div>
         <div>
             <section id="search">Search For a City:</section>
-            <input class="input is-large" type="text" placeholder="Large input">
-            <p>-----------------------</p>
+            <input class="input is-large" type="text" placeholder="Large input" id="city-search">
+            <button class="button is-fullwidth" id="click">Search</button>
+            <p id="list">-----------------------</p>
 
         </div>
 
@@ -52,6 +53,9 @@
 
 
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs/dayjs.min.js"></script>
     <script src="/assets/scritpt.js"></script>
   </body>
 </html>
