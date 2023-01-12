@@ -78,17 +78,17 @@ function getCurrent(city) {
 
         placeNameRender.textContent = placeName;
         displayTimeRender.textContent = displayTime;
-        tempRender.textContent = temp;
-        windRender.textContent = wind;
-        humidityRender.textContent = humidity;
+        tempRender.textContent = "Temp: " + temp + " \u2109";
+        windRender.textContent = "Wind: " + wind + " mpy";
+        humidityRender.textContent = "Humidity: " + humidity + " %";
         
         
         currentEl.appendChild(placeNameRender);
         currentEl.appendChild(displayTimeRender);
         currentEl.appendChild(iconRender)
-        currentEl.appendChild("Temp: " + tempRender);
-        currentEl.appendChild("Wind: " + windRender);
-        currentEl.appendChild("Humidity: " + humidityRender);
+        currentEl.appendChild(tempRender);
+        currentEl.appendChild(windRender);
+        currentEl.appendChild(humidityRender);
        
 
     }
@@ -112,43 +112,53 @@ function getFiveDay(city) {
       })
     .then(function (data) {
         console.log(data)
-        future = []
-        var temp = data.list[0].main.temp
-        var wind = data.list[0].wind.speed
-        var humidity = data.list[0].main.humidity
-        var time = data.list[0].dt
-        var displayTime = dayjs.unix(time).format("MM-DD-YYYY");
 
-                    
+        fiveDayEl.innerHTML = "";
 
-        var icon = data.list[0].weather[0].icon
-        var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+        for(i = 3; i < data.list.length; i += 8) {
+            var temp = data.list[i].main.temp
+            var wind = data.list[i].wind.speed
+            var humidity = data.list[i].main.humidity
+            var time = data.list[i].dt
+            var displayTime = dayjs.unix(time).format("MM-DD-YYYY");  
+
+            var icon = data.list[i].weather[0].icon
+            var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
 
 
-        console.log(temp, wind, icon, displayTime)
+            
 
-        function fiveDayRender() { 
+            
+            var cardHolder = document.createElement('div')
+            cardHolder.classList.add('cards')
+            fiveDayEl.append(cardHolder)
+
+            
+
+            var placeNameRender = document.createElement('p');
+            var displayTimeRender = document.createElement('p');
+            var tempRender = document.createElement('p');
+            var windRender = document.createElement('p');
+            var humidityRender = document.createElement('p');
+
+            var iconRender = document.createElement('img');
+            iconRender.setAttribute('src', iconUrl);
+
         
+            displayTimeRender.textContent = displayTime;
+            tempRender.textContent = "Temp: " + temp + " \u2109";
+            windRender.textContent = "Wind: " + wind + " mph";
+            humidityRender.textContent = "Humidity: " + humidity + " %";
+            
+            
+            cardHolder.appendChild(placeNameRender);
+            cardHolder.appendChild(displayTimeRender);
+            cardHolder.appendChild(iconRender)
+            cardHolder.appendChild(tempRender);
+            cardHolder.appendChild(windRender);
+            cardHolder.appendChild(humidityRender);
 
-        var placeNameRender = document.createElement('p');
-        var displayTimeRender = document.createElement('p');
-        var tempRender = document.createElement('p');
-        var windRender = document.createElement('p');
-        var humidityRender = document.createElement('p');
-
-        placeNameRender.textContent = placeName;
-        displayTimeRender.textContent = displayTime;
-        tempRender.textContent = temp;
-        windRender.textContent = wind;
-        humidityRender.textContent = humidity;
-        
-        
-        fiveDayEl.appendChild(placeNameRender);
-        fiveDayEl.appendChild(displayTimeRender);
-        fiveDayEl.appendChild(iconRender)
-        fiveDayEl.appendChild("Temp: " + tempRender);
-        fiveDayEl.appendChild("Wind: " + windRender);
-        fiveDayEl.appendChild("Humidity: " + humidityRender);
+            
 
         }
        

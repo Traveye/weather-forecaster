@@ -9,3 +9,9 @@
     border-style: solid;
     display: inline;
 }
+
+.cards {
+    border-style: solid;
+    width: fit-content;
+    background-color: greenyellow;
+}
