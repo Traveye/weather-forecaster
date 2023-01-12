@@ -154,8 +154,6 @@ function getFiveDay(city) {
 
 
             
-
-            
             var cardHolder = document.createElement('div')
             cardHolder.classList.add('cards')
             fiveDayEl.append(cardHolder)
@@ -163,15 +161,15 @@ function getFiveDay(city) {
             
 
             var placeNameRender = document.createElement('p');
-            placeNameRender.setAttribute("class", "five tile is-child p-2")
+            placeNameRender.setAttribute("class", "tile is-child p-2 has-text-centered")
             var displayTimeRender = document.createElement('p')
-            displayTimeRender.setAttribute("class", "five tile is-child p-2")
+            displayTimeRender.setAttribute("class", "tile is-child p-2 has-text-centered")
             var tempRender = document.createElement('p');
-            tempRender.setAttribute("class", "five tile is-child p-2")
+            tempRender.setAttribute("class", "tile is-child p-2 has-text-centered")
             var windRender = document.createElement('p');
-            windRender.setAttribute("class", "five tile is-child p-2")
+            windRender.setAttribute("class", "tile is-child p-2 has-text-centered")
             var humidityRender = document.createElement('p');
-            humidityRender.setAttribute("class", "five tile is-child p-2")
+            humidityRender.setAttribute("class", "tile is-child p-2 has-text-centered")
 
             var iconRender = document.createElement('img');
             iconRender.setAttribute('src', iconUrl);
