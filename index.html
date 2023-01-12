@@ -17,23 +17,28 @@
         </div>
     </section>
     <!-- main body -->
-    <div>
-        <div>
-            <section id="search">Search For a City:</section>
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-vertical is-4">
+          
+          <section class="tile is-child p-3" id="search" >
+            <h1>Search for a City:</h1>
             <input class="input is-large" type="text" placeholder="Large input" id="city-search">
             <button class="button is-fullwidth" id="click">Search</button>
-            <p id="list">-----------------------</p>
+            <p id="list">-</p>
+            </section>
+           
 
         </div>
 
-        <div>
-            <section id="current">
-                <h2>Place Holder:</h2>
+        <div class="tile is-parent is-vertical is-8">
+            
+            <section class="tile is-child p-3 has-text-centered" id="current">
+                <h2></h2>
 
             </section>
 
-            <section id="five-day">
-                <h2>5-Day Forecast:</h2>
+            <section class="tile is-child p-3" id="five-day">
+                <h2></h2>
 
             </section>
 

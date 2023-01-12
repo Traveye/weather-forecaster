@@ -1,3 +1,17 @@
+* {
+    background-color: #5fa07c;
+    color: #efcc65;
+}
+
+body {
+    height: 100vh;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 200;
+}
+
 .center {
     display: flex;
     justify-content: center;
@@ -7,11 +21,11 @@
 
 .list-button {
     border-style: solid;
-    display: inline;
+    background-color: #fc979a;
 }
 
 .cards {
     border-style: solid;
     width: fit-content;
-    background-color: greenyellow;
+    
 }

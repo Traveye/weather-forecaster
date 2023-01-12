@@ -5,39 +5,66 @@ const currentEl = document.querySelector('#current')
 const fiveDayEl = document.querySelector('#five-day')
 var cityList = [];
 
+//resets buttons from local storage at page load
+function pageInitial() {
+    var oldCity = JSON.parse(localStorage.getItem("city"))
+    for(i = 0; i < oldCity.length; i++) {
+        var listEl = document.querySelector('#list');
+        var listItem = document.createElement('button');
+        listItem.textContent = oldCity[i];
+        listItem.classList.add('list-button');
+        listItem.setAttribute("class",'button is-fullwidth')
+        listEl.appendChild(listItem);
 
+        listItem.addEventListener("click", function(){
+            var city = listItem.textContent;
+            getCurrent(city)
+            getFiveDay(city)
+        });
+      };
 
+}
 
-
+//this triggers search / sets local storage / triggers api calls
 buttonEl.addEventListener("click", function(){
     city = userInput.value
-    localStorage.setItem("city", city)
-    previosSearch()
+    if(cityList.includes(city)) {
+        console.log("repeat")
+    }
+    else{
+        cityList.push(city)
+        localStorage.setItem("city", JSON.stringify(cityList));
+    }
+    
+    previosSearch(city)
     getCurrent(city);
     getFiveDay(city)
 })
 
-// this sets the previous search list with buttons
-function previosSearch() {
-    var oldCity = localStorage.getItem("city")
-    console.log(oldCity)
-    if(cityList.includes(oldCity)) {
-        console.log("repeat")
-    }
-    else {
-        cityList.push(oldCity);
+// this sets the newer recent search buttons after reload
+function previosSearch(city) {
+
         var listEl = document.querySelector('#list')
         var listItem = document.createElement('button')
-        listItem.textContent = oldCity
+        listItem.textContent = city
         listItem.classList.add('list-button')
-        listEl.appendChild(listItem)
+        listItem.setAttribute("class",'button is-fullwidth')
+        listEl.appendChild(listItem) 
+
+    
+
+        listItem.addEventListener("click", function(){
+            var city = listItem.textContent;
+            getCurrent(city)
+            getFiveDay(city)
+        });
         
 
     }
     
-}
 
-// this gets current weather
+
+// this is current weather api call and renders to page
 function getCurrent(city) {
     currentUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=5e2060eedf6abe8e55c023dfb119a674"
     fetch(currentUrl)
@@ -166,3 +193,4 @@ function getFiveDay(city) {
 }
     
 
+pageInitial();
