@@ -163,10 +163,15 @@ function getFiveDay(city) {
             
 
             var placeNameRender = document.createElement('p');
-            var displayTimeRender = document.createElement('p');
+            placeNameRender.setAttribute("class", "five tile is-child p-2")
+            var displayTimeRender = document.createElement('p')
+            displayTimeRender.setAttribute("class", "five tile is-child p-2")
             var tempRender = document.createElement('p');
+            tempRender.setAttribute("class", "five tile is-child p-2")
             var windRender = document.createElement('p');
+            windRender.setAttribute("class", "five tile is-child p-2")
             var humidityRender = document.createElement('p');
+            humidityRender.setAttribute("class", "five tile is-child p-2")
 
             var iconRender = document.createElement('img');
             iconRender.setAttribute('src', iconUrl);

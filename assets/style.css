@@ -16,6 +16,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 
@@ -27,5 +28,9 @@ h1 {
 .cards {
     border-style: solid;
     width: fit-content;
+    width: max-content;
+    margin: 10px;
+    
     
 }
+
