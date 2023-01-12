@@ -2,6 +2,7 @@
 const buttonEl = document.querySelector("#click")
 const userInput = document.querySelector('#city-search')
 const currentEl = document.querySelector('#current')
+const fiveDayEl = document.querySelector('#five-day')
 var cityList = [];
 
 
@@ -13,6 +14,7 @@ buttonEl.addEventListener("click", function(){
     localStorage.setItem("city", city)
     previosSearch()
     getCurrent(city);
+    getFiveDay(city)
 })
 
 // this sets the previous search list with buttons
@@ -51,26 +53,106 @@ function getCurrent(city) {
       })
     .then(function (data) {
         console.log(data)
-        var placeName = data.name
-        var currentTime = dayjs.format('MM-DD-YYYY H:mm');
-        var displayTime = currentTime.format('MM-DD-YYYY H:mm')
-        var temp = data.main.temp
-        var wind = data.wind.speed
-        var icon = data.weather[0].icon
+        var placeName = data.name;
+        var currentTime = dayjs();
+        var displayTime = currentTime.format('MM-DD-YYYY H:mm');
+        var temp = data.main.temp;
+        var wind = data.wind.speed;
+        var humidity = data.main.humidity;
+        var icon = data.weather[0].icon;
+        var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+        currentRender();
 
-        var placeNameRender = document.createElement("h2")
-        var iconRender = document.createElement('p')
-        var timeRender = document.createElement('h3')
-        var tempRender = document.createElement('h3')
-        var windRender = document.createElement('h3')
-
+    function currentRender() { 
+        var placeNameRender = document.createElement('p');
+        var displayTimeRender = document.createElement('p');
+        var tempRender = document.createElement('p');
+        var windRender = document.createElement('p');
+        var humidityRender = document.createElement('p');
         
+        //icon only
+        var iconRender = document.createElement('img');
+        iconRender.setAttribute('src', iconUrl);
 
-        console.log(placeName, displayTime, temp, wind, icon)
+        currentEl.innerHTML = '';
+
+        placeNameRender.textContent = placeName;
+        displayTimeRender.textContent = displayTime;
+        tempRender.textContent = temp;
+        windRender.textContent = wind;
+        humidityRender.textContent = humidity;
+        
+        
+        currentEl.appendChild(placeNameRender);
+        currentEl.appendChild(displayTimeRender);
+        currentEl.appendChild(iconRender)
+        currentEl.appendChild("Temp: " + tempRender);
+        currentEl.appendChild("Wind: " + windRender);
+        currentEl.appendChild("Humidity: " + humidityRender);
+       
+
+    }
 
       })
-
-      // city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-    
     
 }
+
+function getFiveDay(city) {
+    fiveDayUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=5e2060eedf6abe8e55c023dfb119a674"
+    fetch(fiveDayUrl)
+    .then(function (response) {
+        if(!response) {
+            //need text to notify user
+        }
+        else {
+            return response.json();
+            
+            
+        }
+      })
+    .then(function (data) {
+        console.log(data)
+        future = []
+        var temp = data.list[0].main.temp
+        var wind = data.list[0].wind.speed
+        var humidity = data.list[0].main.humidity
+        var time = data.list[0].dt
+        var displayTime = dayjs.unix(time).format("MM-DD-YYYY");
+
+                    
+
+        var icon = data.list[0].weather[0].icon
+        var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+
+
+        console.log(temp, wind, icon, displayTime)
+
+        function fiveDayRender() { 
+        
+
+        var placeNameRender = document.createElement('p');
+        var displayTimeRender = document.createElement('p');
+        var tempRender = document.createElement('p');
+        var windRender = document.createElement('p');
+        var humidityRender = document.createElement('p');
+
+        placeNameRender.textContent = placeName;
+        displayTimeRender.textContent = displayTime;
+        tempRender.textContent = temp;
+        windRender.textContent = wind;
+        humidityRender.textContent = humidity;
+        
+        
+        fiveDayEl.appendChild(placeNameRender);
+        fiveDayEl.appendChild(displayTimeRender);
+        fiveDayEl.appendChild(iconRender)
+        fiveDayEl.appendChild("Temp: " + tempRender);
+        fiveDayEl.appendChild("Wind: " + windRender);
+        fiveDayEl.appendChild("Humidity: " + humidityRender);
+
+        }
+       
+    });
+}
+    
+
